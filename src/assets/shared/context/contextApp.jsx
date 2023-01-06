@@ -59,7 +59,6 @@ const DadosProvider = ({ children }) => {
           alert("Aconteceu algo de errado:" + err);
         });
     });
-    localStorage.removeItem("dados");
     localStorage.setItem("dados", JSON.stringify(clientes));
   };
   if (!data) {
