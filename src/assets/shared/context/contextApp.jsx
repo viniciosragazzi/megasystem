@@ -28,10 +28,10 @@ const DadosProvider = ({ children }) => {
 
   const sincronizar = (e) => {
     e.preventDefault();
-    if (data.length < 1) {
+   
       localStorage.setItem("dados", JSON.stringify(clientes));
       setDone(true);
-    }
+    
     let cont = 0
     data.map((clienteLocal) => {
       const cliente = {
@@ -119,6 +119,7 @@ const DadosProvider = ({ children }) => {
     setData(newData);
     setDone(false);
     setLoading(false);
+ 
   }
 
   return (
