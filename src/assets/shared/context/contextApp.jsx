@@ -32,6 +32,7 @@ const DadosProvider = ({ children }) => {
       localStorage.setItem("dados", JSON.stringify(clientes));
       setDone(true);
     }
+    let cont = 0
     data.map((clienteLocal) => {
       const cliente = {
         acessorios: clienteLocal.acessorios,
@@ -55,7 +56,13 @@ const DadosProvider = ({ children }) => {
       };
       set(ref(db, "Clientes/" + clienteLocal.nome), cliente)
         .then(() => {
-          console.log("add");
+          cont++
+        
+          if(cont === data.length){
+       
+          window.location.href = "/";
+
+          }
         })
         .catch((err) => {
           alert("Aconteceu algo de errado:" + err);
