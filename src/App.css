@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  accent-color: hsl(153deg, 1%, 54%) !important;
+}
+
+html {
+  font-size: 80%;
+}
+
+@media (max-width: 520px) {
+  html {
+    font-size: 70%;
+  }
+}/*# sourceMappingURL=App.css.map */
