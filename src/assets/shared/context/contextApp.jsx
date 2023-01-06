@@ -28,8 +28,10 @@ const DadosProvider = ({ children }) => {
 
   const sincronizar = (e) => {
     e.preventDefault();
-    setClientes([]);
-
+    if (data.length < 1) {
+      localStorage.setItem("dados", JSON.stringify(clientes));
+      setDone(true)
+    }
     data.map((clienteLocal) => {
       const cliente = {
         acessorios: clienteLocal.acessorios,
@@ -59,9 +61,9 @@ const DadosProvider = ({ children }) => {
           alert("Aconteceu algo de errado:" + err);
         });
     });
-    localStorage.setItem("dados", JSON.stringify(clientes));
   };
   if (!data) {
+    console.log(clientes);
     localStorage.setItem("dados", JSON.stringify([]));
   }
   const [num, setNum] = useState(1);
@@ -107,7 +109,6 @@ const DadosProvider = ({ children }) => {
   if (done) {
     const newData = JSON.parse(localStorage.getItem("dados"));
     setData(newData);
-    sincronizar();
     setDone(false);
     setLoading(false);
   }
