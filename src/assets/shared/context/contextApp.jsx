@@ -30,7 +30,7 @@ const DadosProvider = ({ children }) => {
     e.preventDefault();
     if (data.length < 1) {
       localStorage.setItem("dados", JSON.stringify(clientes));
-      setDone(true)
+      setDone(true);
     }
     data.map((clienteLocal) => {
       const cliente = {
@@ -80,6 +80,7 @@ const DadosProvider = ({ children }) => {
   const atualizar = (dado) => {
     let dados = [dado, ...newData];
     localStorage.setItem("dados", JSON.stringify(dados));
+   
     setLoading(true);
     setTimeout(() => {
       setDone(true);
