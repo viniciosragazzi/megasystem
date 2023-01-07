@@ -42,7 +42,7 @@ const Home = () => {
           </nav>
         </header>
         <section className="tableArea my-4">
-          <nav className="tableFilter flex flex-col items-center md:flex-row  justify-center gap-10 p-4">
+          <nav className="tableFilter flex flex-col-reverse  items-center md:flex-row  justify-center gap-10 p-4">
             <div className="input w-full border  max-w-sm min-w-[320px] rounded-full px-4 py-2 border-gray-600">
               <input
                 type="text"
