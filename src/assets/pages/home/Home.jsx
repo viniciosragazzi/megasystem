@@ -38,10 +38,7 @@ const Home = () => {
               Master<span className=" text-gray-600">System</span> {num}
             </div>
             <span className="namePage text-md font-semibold ">Dashboard</span>
-           <div className="btns flex gap-3">
-           <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">Sincronizar</div>
-            <div onClick={getToFirebase} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">Baixar dados Firebase</div>
-           </div>
+         
           </nav>
         </header>
         <section className="tableArea my-4">
@@ -79,7 +76,12 @@ const Home = () => {
               >
                 Novo Cliente
               </button>
+              
             </div>
+            <div className="btns flex flex-col md:flex-row gap-3">
+           <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Sincronizar</div>
+            <div onClick={getToFirebase} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Baixar dados Firebase</div>
+           </div>
           </nav>
 
           {data.length > 0 ? (
