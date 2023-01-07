@@ -78,7 +78,7 @@ const Home = () => {
               </button>
               
             </div>
-            <div className="btns flex flex-col md:flex-row gap-3">
+            <div className="btns flex  gap-3">
            <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Sincronizar</div>
             <div onClick={getToFirebase} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Baixar dados Firebase</div>
            </div>
