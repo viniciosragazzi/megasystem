@@ -20,7 +20,8 @@ const Home = () => {
     setOpenModal,
     loading,
     setModalMode,
-    sincronizar
+    sincronizar,
+    getToFirebase
   } = useContext(DadosContext);
   const [dataFiltered, setDataFiltered] = useState(data);
   useEffect(() => {
@@ -37,7 +38,10 @@ const Home = () => {
               Master<span className=" text-gray-600">System</span> {num}
             </div>
             <span className="namePage text-md font-semibold ">Dashboard</span>
-            <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">Sincronizar</div>
+           <div className="btns flex gap-3">
+           <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">Sincronizar</div>
+            <div onClick={getToFirebase} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer">Baixar dados Firebase</div>
+           </div>
           </nav>
         </header>
         <section className="tableArea my-4">
@@ -107,7 +111,7 @@ const Home = () => {
                         : ""
                     } `}
                     onClick={() => {
-                      num + 10 < dataFiltered.length ? setNum(num + 10) : null;
+                      num + 9 < dataFiltered.length ? setNum(num + 10) : null;
                     }}
                   />
                 </div>

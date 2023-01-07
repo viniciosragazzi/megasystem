@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 export const DadosContext = createContext({});
 //initialize firebase
 import { db } from "../firebase/firebaseConfig";
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, remove, set } from "firebase/database";
 
 const DadosProvider = ({ children }) => {
   //Firebase
@@ -22,17 +22,26 @@ const DadosProvider = ({ children }) => {
     });
   }, []);
 
-  /////
-
   const [data, setData] = useState(JSON.parse(localStorage.getItem("dados")));
+
+  const getToFirebase = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("dados");
+    console.log(clientes);
+    setDone(true);
+    setTimeout(() => {
+      localStorage.setItem("dados", JSON.stringify(clientes));
+    }, 1000);
+
+    setTimeout(() => {
+      setDone(true);
+    }, 1200);
+  };
 
   const sincronizar = (e) => {
     e.preventDefault();
-   
-      localStorage.setItem("dados", JSON.stringify(clientes));
-      setDone(true);
-    
-    let cont = 0
+
+    let cont = 0;
     data.map((clienteLocal) => {
       const cliente = {
         acessorios: clienteLocal.acessorios,
@@ -56,12 +65,10 @@ const DadosProvider = ({ children }) => {
       };
       set(ref(db, "Clientes/" + clienteLocal.nome), cliente)
         .then(() => {
-          cont++
-        
-          if(cont === data.length){
-       
-          window.location.href = "/";
+          cont++;
 
+          if (cont === data.length) {
+            window.location.href = "/";
           }
         })
         .catch((err) => {
@@ -69,10 +76,34 @@ const DadosProvider = ({ children }) => {
         });
     });
   };
+
+  const setNewData = (data, dados) => {
+    set(ref(db, "Clientes/" + data.id), data)
+      .then(() => {
+        console.log("add");
+      })
+      .catch((err) => {
+        alert("Aconteceu algo de errado:" + err);
+      });
+  };
+
+  const removeItem = (data, dados) => {
+    console.log(data);
+    remove(ref(db, "Clientes/" + data.id))
+      .then(() => {
+        console.log("removed");
+      })
+      .catch((err) => {
+        alert("Aconteceu algo de errado:" + err);
+      });
+  };
+
   if (!data) {
     console.log(clientes);
     localStorage.setItem("dados", JSON.stringify([]));
   }
+
+  //////////////////////////
   const [num, setNum] = useState(1);
   const [filterTextData, setFilterTextData] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -87,7 +118,8 @@ const DadosProvider = ({ children }) => {
   const atualizar = (dado) => {
     let dados = [dado, ...newData];
     localStorage.setItem("dados", JSON.stringify(dados));
-   
+
+    setNewData(dado);
     setLoading(true);
     setTimeout(() => {
       setDone(true);
@@ -96,6 +128,7 @@ const DadosProvider = ({ children }) => {
 
   const editar = (dado) => {
     let dados = newData;
+    setNewData(dado);
     dados[indexEdit] = dado;
     localStorage.setItem("dados", JSON.stringify(dados));
     setLoading(true);
@@ -106,7 +139,8 @@ const DadosProvider = ({ children }) => {
 
   const excluir = (index) => {
     let dados = newData;
-    dados.splice(index, 1);
+    const deletado = dados.splice(index, 1);
+    removeItem(deletado);
     localStorage.setItem("dados", JSON.stringify(dados));
     setLoading(true);
     setTimeout(() => {
@@ -119,7 +153,10 @@ const DadosProvider = ({ children }) => {
     setData(newData);
     setDone(false);
     setLoading(false);
- 
+
+    setTimeout(() => {
+      sincronizar();
+    }, 4000);
   }
 
   return (
@@ -146,6 +183,7 @@ const DadosProvider = ({ children }) => {
         itemPrint,
         setItemPrint,
         sincronizar,
+        getToFirebase,
       }}
     >
       {children}

@@ -46,6 +46,7 @@ const Table = ({ data }) => {
               <th className="text-center py-2 min-w-[100px]">Nome</th>
               <th className="text-center py-2 min-w-[100px]">Contato</th>
               <th className="text-center py-2 min-w-[100px]">Equipamento</th>
+              <th className="text-center py-2 min-w-[100px]">Marca</th>
               <th className="text-center py-2 min-w-[100px]">Técnico</th>
               <th className="text-center py-2 min-w-[100px]">Status</th>
               <th className="text-center py-2 min-w-[100px]">Valor</th>
@@ -55,7 +56,7 @@ const Table = ({ data }) => {
           <tbody>
             {filteredData.map((item, index) => (
               <tr className="bg-white" key={index}>
-                <td className="border text-center py-2 min-w-[100px]">
+                <td className="border text-center py-2 min-w-[100px] font-semibold">
                   {item.nome}
                 </td>
                 <td className="border text-center py-2 min-w-[100px]">
@@ -64,12 +65,15 @@ const Table = ({ data }) => {
                 <td className="border text-center py-2 min-w-[100px]">
                 {item.equipamento}
                 </td>
-                <td className="border text-center py-2 min-w-[100px]">   {item.tecnico}</td>
                 <td className="border text-center py-2 min-w-[100px]">
+                {item.marca}
+                </td>
+                <td className="border text-center py-2 min-w-[100px]">   {item.tecnico}</td>
+                <td className={`border text-center py-2 min-w-[100px] capitalize text-white ${item.status === 'aprovado' ? 'bg-green-500 ' : item.status === 'orçamento' ? ' bg-slate-500' :  item.status === 'pronto' ? ' bg-blue-500' : ' bg-orange-500' }`}>
                 {item.status}
                 </td>{" "}
                 <td className="border text-center py-2 min-w-[100px]">
-                {item.valor}
+                R$ {item.valor}
                 </td>
                 <td className="border text-center py-2 min-w-[100px]">
                   <div className="btns flex flex-col md:flex-row w-full justify-center items-center gap-3">

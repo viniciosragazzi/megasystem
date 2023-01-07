@@ -42,7 +42,7 @@ const PdfPage = () => {
           </div>
 
           <div className="box flex justify-center">
-            <h1 className="font-bold text-3xl my-5">Nota de Orçamento</h1>
+            <h1 className="font-bold text-3xl my-5">Nota de {data[itemPrint].status === 'orçamento' ? 'Orçamento' : data[itemPrint].status === 'aprovado' || data[itemPrint].status === 'pronto' ? 'Entrega' : data[itemPrint]}</h1>
           </div>
         </header>
 
