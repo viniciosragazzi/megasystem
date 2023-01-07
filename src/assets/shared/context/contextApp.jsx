@@ -78,20 +78,10 @@ const DadosProvider = ({ children }) => {
   };
 
   const setNewData = (data, dados) => {
+    console.log(data.id);
     set(ref(db, "Clientes/" + data.id), data)
       .then(() => {
         console.log("add");
-      })
-      .catch((err) => {
-        alert("Aconteceu algo de errado:" + err);
-      });
-  };
-
-  const removeItem = (data, dados) => {
-    console.log(data);
-    remove(ref(db, "Clientes/" + data.id))
-      .then(() => {
-        console.log("removed");
       })
       .catch((err) => {
         alert("Aconteceu algo de errado:" + err);
@@ -138,15 +128,35 @@ const DadosProvider = ({ children }) => {
   };
 
   const excluir = (index) => {
-    let dados = newData;
-    const deletado = dados.splice(index, 1);
-    removeItem(deletado);
-    localStorage.setItem("dados", JSON.stringify(dados));
-    setLoading(true);
-    setTimeout(() => {
-      setDone(true);
-    }, 500);
+    let id = data[index].id;
+    if (window.confirm("Quer realmente excluir  ?")) {
+      set(ref(db, "Clientes/" + id), null)
+        .then(() => {
+          console.log("removed");
+        })
+        .catch((err) => {
+          alert("Aconteceu algo de errado:" + err);
+        });
+      let dados = newData;
+      const deletado = dados.splice(index, 1);
+      localStorage.setItem("dados", JSON.stringify(dados));
+      setLoading(true);
+      setTimeout(() => {
+        setDone(true);
+      }, 500);
+    }
   };
+
+  // const excluir = (index) => {
+  //   let dados = newData;
+  //   const deletado = dados.splice(index, 1);
+  //   removeItem(deletado);
+  //   localStorage.setItem("dados", JSON.stringify(dados));
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setDone(true);
+  //   }, 500);
+  // };
 
   if (done) {
     const newData = JSON.parse(localStorage.getItem("dados"));

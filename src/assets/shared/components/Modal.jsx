@@ -8,6 +8,7 @@ const Modal = () => {
     useContext(DadosContext);
 
   const [nome, setNome] = useState("");
+  const [id, setId] = useState("");
   const [contato, setContato] = useState("");
   const [documento, setDocumento] = useState("");
   const [equipamento, setEquipamento] = useState("");
@@ -28,6 +29,7 @@ const Modal = () => {
 
   useEffect(() => {
     if (modalMode === "edit") {
+      setId(data[indexEdit].id);
       setNome(data[indexEdit].nome);
       setContato(data[indexEdit].contato);
       setDocumento(data[indexEdit].documento);
@@ -76,6 +78,7 @@ const Modal = () => {
       });
     } else {
       editar({
+        id,
         nome,
         contato,
         documento,
@@ -117,7 +120,8 @@ const Modal = () => {
         <h1 className="title text-black text-center text-4xl font-semibold">
           Gerencimento de Clientes {modalMode}
         </h1>
-
+          <p>ID do Serviço: {id}
+          </p>
         <form className=" mt-10 ">
           <div className="flexGroup md:flex justify-center">
             <div className="md:flex md:items-center gap-2 mb-6 flex-col min-w-[260px] ">
