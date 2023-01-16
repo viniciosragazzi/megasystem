@@ -4,7 +4,7 @@ import { DadosContext } from "../../shared/context/contextApp";
 
 import { AiFillCloseCircle } from "react-icons/ai";
 const Modal = () => {
-  const { atualizar, setOpenModal, modalMode, data, indexEdit, editar } =
+  const { atualizar, setOpenModal, modalMode, data, itemEdit, editar } =
     useContext(DadosContext);
 
   const [nome, setNome] = useState("");
@@ -29,25 +29,25 @@ const Modal = () => {
 
   useEffect(() => {
     if (modalMode === "edit") {
-      setId(data[indexEdit].id);
-      setNome(data[indexEdit].nome);
-      setContato(data[indexEdit].contato);
-      setDocumento(data[indexEdit].documento);
-      setEquipamento(data[indexEdit].equipamento);
-      setAcessorios(data[indexEdit].acessorios);
-      setModelo(data[indexEdit].modelo);
-      setValor(data[indexEdit].valor);
-      setMarca(data[indexEdit].marca);
-      setNSerie(data[indexEdit].nSerie);
-      setProblema(data[indexEdit].problema);
-      setServico(data[indexEdit].servico);
-      setTecnico(data[indexEdit].tecnico);
-      setCidade(data[indexEdit].cidade);
-      setEndereco(data[indexEdit].endereco);
-      setUF(data[indexEdit].uf);
-      setStatus(data[indexEdit].status);
-      setDataEnt(data[indexEdit].dataEnt);
-      setHoraEnt(data[indexEdit].horaEnt);
+      setId(itemEdit[0].id);
+      setNome(itemEdit[0].nome);
+      setContato(itemEdit[0].contato);
+      setDocumento(itemEdit[0].documento);
+      setEquipamento(itemEdit[0].equipamento);
+      setAcessorios(itemEdit[0].acessorios);
+      setModelo(itemEdit[0].modelo);
+      setValor(itemEdit[0].valor);
+      setMarca(itemEdit[0].marca);
+      setNSerie(itemEdit[0].nSerie);
+      setProblema(itemEdit[0].problema);
+      setServico(itemEdit[0].servico);
+      setTecnico(itemEdit[0].tecnico);
+      setCidade(itemEdit[0].cidade);
+      setEndereco(itemEdit[0].endereco);
+      setUF(itemEdit[0].uf);
+      setStatus(itemEdit[0].status);
+      setDataEnt(itemEdit[0].dataEnt);
+      setHoraEnt(itemEdit[0].horaEnt);
     }
   }, [modalMode]);
   const enviar = () => {

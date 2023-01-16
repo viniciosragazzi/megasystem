@@ -101,7 +101,7 @@ const DadosProvider = ({ children }) => {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalMode, setModalMode] = useState("");
-  const [indexEdit, setIndexEdit] = useState("");
+  const [itemEdit, setItemEdit] = useState("");
   const [itemPrint, setItemPrint] = useState("");
   let newData = JSON.parse(localStorage.getItem("dados"));
 
@@ -119,7 +119,9 @@ const DadosProvider = ({ children }) => {
   const editar = (dado) => {
     let dados = newData;
     setNewData(dado);
-    dados[indexEdit] = dado;
+    const indexItem = dados.findIndex((item) => item.id === itemEdit[0].id);
+
+    dados[indexItem] = dado;
     localStorage.setItem("dados", JSON.stringify(dados));
     setLoading(true);
     setTimeout(() => {
@@ -127,7 +129,9 @@ const DadosProvider = ({ children }) => {
     }, 500);
   };
 
-  const excluir = (index) => {
+  const excluir = (correto) => {
+    let dados = newData;
+    const index = dados.findIndex((item) => item.id === correto[0].id);
     let id = data[index].id;
     if (window.confirm("Quer realmente excluir  ?")) {
       set(ref(db, "Clientes/" + id), null)
@@ -137,7 +141,6 @@ const DadosProvider = ({ children }) => {
         .catch((err) => {
           alert("Aconteceu algo de errado:" + err);
         });
-      let dados = newData;
       const deletado = dados.splice(index, 1);
       localStorage.setItem("dados", JSON.stringify(dados));
       setLoading(true);
@@ -187,8 +190,8 @@ const DadosProvider = ({ children }) => {
         editar,
         modalMode,
         setModalMode,
-        indexEdit,
-        setIndexEdit,
+        itemEdit,
+        setItemEdit,
         excluir,
         itemPrint,
         setItemPrint,
