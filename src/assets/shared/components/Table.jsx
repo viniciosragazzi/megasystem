@@ -22,9 +22,7 @@ const Table = ({ data }) => {
 
   const filteredData = data.filter(
     (item, index) =>
-      (filterText.length > 2 &&
-        item.nome.toLowerCase().includes(filterText.toLowerCase())) ||
-      (filterText === "" && index >= num - 1 && index < num + 9)
+      (filterText.length > 2 && (item.nome.toLowerCase().includes(filterText.toLowerCase())|| item.marca.toLowerCase().includes(filterText.toLowerCase())|| item.equipamento.toLowerCase().includes(filterText.toLowerCase()))) ||(filterText === "" && index >= num - 1 && index < num + 9)
   );
 
   const clickEdit = (index) => {

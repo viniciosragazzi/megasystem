@@ -35,7 +35,7 @@ const Home = () => {
         <header>
           <nav className="flex justify-between p-5">
             <div className="logo text-xl font-bold">
-              Master<span className=" text-gray-600">System</span> {num}
+              Master<span className=" text-gray-600">System</span> 
             </div>
             <span className="namePage text-md font-semibold ">Dashboard</span>
          
