@@ -21,11 +21,15 @@ const Home = () => {
     loading,
     setModalMode,
     sincronizar,
-    getToFirebase
+    getToFirebase,
   } = useContext(DadosContext);
   const [dataFiltered, setDataFiltered] = useState(data);
   useEffect(() => {
-    setDataFiltered(data);
+    setDataFiltered(
+      data.sort((a, b) => {
+        return new Date(b.dataEnt) - new Date(a.dataEnt);
+      })
+    );
   }, [data]);
 
   return (
@@ -35,10 +39,9 @@ const Home = () => {
         <header>
           <nav className="flex justify-between p-5">
             <div className="logo text-xl font-bold">
-              Master<span className=" text-gray-600">System</span> 
+              Master<span className=" text-gray-600">System</span>
             </div>
             <span className="namePage text-md font-semibold ">Dashboard</span>
-         
           </nav>
         </header>
         <section className="tableArea my-4">
@@ -76,12 +79,21 @@ const Home = () => {
               >
                 Novo Cliente
               </button>
-              
             </div>
             <div className="btns flex  gap-3">
-           <div onClick={sincronizar} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Sincronizar</div>
-            <div onClick={getToFirebase} className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center">Baixar dados Firebase</div>
-           </div>
+              <div
+                onClick={sincronizar}
+                className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center"
+              >
+                Sincronizar
+              </div>
+              <div
+                onClick={getToFirebase}
+                className="switch-darkMode bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer text-center"
+              >
+                Baixar dados Firebase
+              </div>
+            </div>
           </nav>
 
           {data.length > 0 ? (

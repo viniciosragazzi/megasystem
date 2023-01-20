@@ -103,9 +103,13 @@ const Modal = () => {
     setOpenModal(false);
   };
 
-  document.addEventListener("click", (e) => {
-    if (e.target.className.includes("fixed")) {
+  document.addEventListener("keydown", (e) => {
+    if (e.code == "Escape") {
       setOpenModal(false);
+    }
+
+    if (e.code == "Enter") {
+      enviar();
     }
   });
   return (
@@ -120,8 +124,7 @@ const Modal = () => {
         <h1 className="title text-black text-center text-4xl font-semibold">
           Gerencimento de Clientes {modalMode}
         </h1>
-          <p>ID do Serviço: {id}
-          </p>
+        <p>ID do Serviço: {id}</p>
         <form className=" mt-10 ">
           <div className="flexGroup md:flex justify-center">
             <div className="md:flex md:items-center gap-2 mb-6 flex-col min-w-[260px] ">
@@ -135,6 +138,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={nome}
                   onChange={(e) => {
                     setNome(e.target.value);
@@ -157,6 +161,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={contato}
                   onChange={(e) => {
                     setContato(e.target.value);
@@ -182,6 +187,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={documento}
                   onChange={(e) => {
                     setDocumento(e.target.value);
@@ -204,6 +210,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={endereco}
                   onChange={(e) => {
                     setEndereco(e.target.value);
@@ -228,6 +235,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={cidade}
                   onChange={(e) => {
                     setCidade(e.target.value);
@@ -250,6 +258,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={uf}
                   onChange={(e) => {
                     setUF(e.target.value);
@@ -273,6 +282,7 @@ const Modal = () => {
             </div>
             <div className="md:w-2/3">
               <input
+                required
                 value={equipamento}
                 onChange={(e) => {
                   setEquipamento(e.target.value);
@@ -295,6 +305,7 @@ const Modal = () => {
             </div>
             <div className="md:w-2/3">
               <input
+                required
                 value={acessorios}
                 onChange={(e) => {
                   setAcessorios(e.target.value);
@@ -318,6 +329,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={modelo}
                   onChange={(e) => {
                     setModelo(e.target.value);
@@ -340,6 +352,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={valor}
                   onChange={(e) => {
                     setValor(e.target.value);
@@ -363,6 +376,7 @@ const Modal = () => {
               </label>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={marca}
                   onChange={(e) => {
                     setMarca(e.target.value);
@@ -385,6 +399,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={nSerie}
                   onChange={(e) => {
                     setNSerie(e.target.value);
@@ -453,6 +468,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={tecnico}
                   onChange={(e) => {
                     setTecnico(e.target.value);
@@ -483,9 +499,13 @@ const Modal = () => {
                   }}
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                 >
+                  <option value="loja">Loja</option>
+
                   <option value="orçamento">Orçamento</option>
                   <option value="aprovado">Aprovado</option>
                   <option value="pronto">Pronto</option>
+                  <option value="lojaPronto">Loja / Pronto</option>
+
                   <option value="entregue">Entregue</option>
                 </select>
               </div>
@@ -503,6 +523,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={dataEnt}
                   onChange={(e) => {
                     setDataEnt(e.target.value);
@@ -524,6 +545,7 @@ const Modal = () => {
               </div>
               <div className="md:w-2/3">
                 <input
+                  required
                   value={horaEnt}
                   onChange={(e) => {
                     setHoraEnt(e.target.value);

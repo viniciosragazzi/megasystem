@@ -22,12 +22,18 @@ const Table = ({ data }) => {
 
   const filteredData = data.filter(
     (item, index) =>
-      (filterText.length > 2 && (item.nome.toLowerCase().includes(filterText.toLowerCase())|| item.marca.toLowerCase().includes(filterText.toLowerCase())|| item.equipamento.toLowerCase().includes(filterText.toLowerCase()))) ||(filterText === "" && index >= num - 1 && index < num + 9)
+      (filterText.length > 2 &&
+        (item.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.marca.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.id.toString().includes(filterText.toLowerCase()) ||
+          item.status.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.equipamento.toLowerCase().includes(filterText.toLowerCase()))) ||
+      (filterText === "" && index >= num - 1 && index < num + 9)
   );
 
   const clickEdit = (index) => {
     const correto = filteredData.filter((item) => {
-      return item.id === index
+      return item.id === index;
     });
     console.log(correto);
     setItemEdit(correto);
@@ -35,12 +41,12 @@ const Table = ({ data }) => {
     setOpenModal(true);
   };
 
-  const clickExcluir = (id)=>{
+  const clickExcluir = (id) => {
     const correto = filteredData.filter((item) => {
-      return item.id === id
+      return item.id === id;
     });
-    excluir(correto)
-  }
+    excluir(correto);
+  };
 
   return (
     <div className=" m-4 overflow-scroll lg:md:overflow-hidden ">
@@ -57,6 +63,7 @@ const Table = ({ data }) => {
               <th className="text-center py-2 min-w-[100px]">Contato</th>
               <th className="text-center py-2 min-w-[100px]">Equipamento</th>
               <th className="text-center py-2 min-w-[100px]">Marca</th>
+              <th className="text-center py-2 min-w-[100px]">Modelo</th>
               <th className="text-center py-2 min-w-[100px]">Técnico</th>
               <th className="text-center py-2 min-w-[100px]">Status</th>
               <th className="text-center py-2 min-w-[100px]">Valor</th>
@@ -97,6 +104,12 @@ const Table = ({ data }) => {
                   {item.marca}
                 </td>
                 <td
+                  data-label="Marca"
+                  className="border text-center py-2 min-w-[100px]"
+                >
+                  {item.modelo}
+                </td>
+                <td
                   data-label="Técnico"
                   className="border text-center py-2 min-w-[100px]"
                 >
@@ -112,7 +125,11 @@ const Table = ({ data }) => {
                       ? " bg-slate-500"
                       : item.status === "pronto"
                       ? " bg-blue-500"
-                      : " bg-orange-500"
+                      : item.status === "loja"
+                      ? " bg-orange-500"
+                      : item.status === "entregue"
+                      ? " bg-purple-500"
+                      : " bg-cyan-500"
                   }`}
                 >
                   {item.status}
@@ -136,7 +153,7 @@ const Table = ({ data }) => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
-                          clickExcluir(item.id)
+                          clickExcluir(item.id);
                         }}
                         className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                       >
