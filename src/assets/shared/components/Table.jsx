@@ -27,6 +27,7 @@ const Table = ({ data }) => {
           item.marca.toLowerCase().includes(filterText.toLowerCase()) ||
           item.id.toString().includes(filterText.toLowerCase()) ||
           item.status.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.modelo.toLowerCase().includes(filterText.toLowerCase()) ||
           item.equipamento.toLowerCase().includes(filterText.toLowerCase()))) ||
       (filterText === "" && index >= num - 1 && index < num + 9)
   );
